@@ -134,7 +134,7 @@ include("./header.php") ;
 	<!-- Add 2nd table container -->
 	<div class="row justify-content-center">
 		<div class="col-auto">
-			<table class="table table-hover table-sm table-responsive" id="Mesurments">
+			<table class="table table-hover table-sm table-responsive" id="cust_of_the_month">
 			
 				<!-- The table header row -->
 				<thead class="thead-light">
@@ -180,14 +180,14 @@ include("./header.php") ;
 	<br>
 	<br>
 	<div class="container-fluid">
-		<h5 style="text-align: center; color: black; font-style: italic;">and this is the current customer of the month</h5>
-		<p style="text-align: center; color: black;">Customer of the month is</p>
+		<h5 style="text-align: center; color: black; font-style: italic;">List of all VIP's</h5>
+		<p style="text-align: center; color: black;">VIP's</p>
 	</div> <!-- Container -->
 	
 	<!-- Add 2nd table container -->
 	<div class="row justify-content-center">
 		<div class="col-auto">
-			<table class="table table-hover table-sm table-responsive" id="Mesurments">
+			<table class="table table-hover table-sm table-responsive" id="Vip">
 			
 				<!-- The table header row -->
 				<thead class="thead-light">
