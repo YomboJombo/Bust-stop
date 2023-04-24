@@ -33,12 +33,22 @@
       <div class="row">
         <div class="col-md-12">
 
-        <img class="img-fluid float-center img-responsive" src="img/bust_stop.jpg" alt="Bust Stop"  width="500px"  style="border: 1px solid"/>
+        <img class="img-fluid float-center img-responsive" src="img/banner.jpg" alt="Bust Stop" id="img" style="border: 1px solid"/>
 
       </div> <!-- col -->
       </div> <!-- row -->
     </div><!-- container -->
-
+<style>
+    img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  clip-path: inset(0);
+  display: block;
+  margin: 0 auto;
+  border: 2px solid black;
+}
+</style>
     <div class="d-flex" id="wrapper">
     
       <!-- Navigation (RHS) Content -->

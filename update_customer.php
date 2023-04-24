@@ -1,43 +1,47 @@
-<?php
-include("./connect_db.php");
-?>
-<?php
-// Assign the transferred POST variables from the form name="" variables.
-$FirstName = $_POST["FirstName"];
-$LastName = $_POST["LastName"];
-$newrole = $_POST["newrole"];
+<?php 
+include("./header.php");
+ // connect to connect_db.php
+ include("./connect_db.php");
+    ?> 
 
-// prepare the SQL statement to retrieve the order ID based on the provided information
-$stmt = $connect->prepare("SELECT CustomerID FROM customer WHERE FirstName = :FirstName OR LastName = :LastName");
-$stmt->bindParam(':FirstName', $FirstName, PDO::PARAM_STR);
-$stmt->bindParam(':LastName', $LastName, PDO::PARAM_STR);
+    <!-- Add teh page content container -->
+    <div class="container-fluid">
+        <h6 style="text-align: center; color: black; font-style: italic;">Basket</h6>
+        <p style="text-align: center; color: black;">Your items.</p>
+    </div> <!-- Container -->
 
-// execute the SQL statement and retrieve the order ID
-$stmt->execute();
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+</tbody>
+</table>
 
-if (!empty($result)) {
-    $CustomerID = $result[0]['CustomerID'];
-} else {
-    // no order found with the provided information
-    $CustomerID = null;
-}
+    <!-- Add the form container -->
+    <div class="container-fluid">
+        <p>Who do you want to recieve this role?</p>
+        <form action="process_update_customer.php" method="POST">
+            <fieldset class="form-group">
 
-// prepare the SQL statement to update the order information
-$stmt = $connect->prepare("UPDATE customer SET roles = :roles WHERE CustomerID = :CustomerID");
-
-// bind parameters to the statement
-$stmt->bindParam(':roles', $newrole);
-$stmt->bindParam(':CustomerID', $CustomerID);
-
-// execute the SQL statement
-$stmt->execute();
-
-
-header("Location: ./display_cust.php");
-exit();
-// Close the database connection
-include("./close_db.php") ;
-?>
+                <div class="form-group">
+                    <label class="form-control-label" for="firstname" style="font-weight: bold;">Enter First Name:</label>
+                    <input class="form-control" style="width: 50%;" type="text" id="firstname" name="firstname" required>
+                </div> 
+                <div class="form-group">
+                    <label class="form-control-label" for="lastname" style="font-weight: bold;">Enter Last Name:</label>
+                    <input class="form-control" style="width: 50%;" type="text" id="lastname" name="lastname" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="role" style="font-weight: bold;">Enter a role for the customer:</label>
+                    <input class="form-control" style="width: 50%;" type="text" id="role" name="role" required>
+                </div>
+              </fieldset> <!-- Feildset-->
+            <!-- The form button -->
+            <div style="text-align: center;">
+                 <button class="btn btn-primary" type="submit">submit</button>
+            <div>
+        </form> <!-- Form-->
+        <?php
+	?>
+    </div> <!-- Container -->
+    <?php
+   include("./footer.php")
+   ?>  
 	
 

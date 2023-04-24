@@ -24,8 +24,8 @@ include("./header.php") ;
 
 				<thead>
 					<tr>
-					<th style="font-weight: bold;">New Role</th>
 					<th style="font-weight: bold;">role</th>
+					<th style="font-weight: bold;">CustomerID</th>
                       <th style="font-weight: bold;">User Name</th>
 					  <th style="font-weight: bold;">First Name</th>
                       <th style="font-weight: bold;">Last name</th>
@@ -57,16 +57,8 @@ include("./header.php") ;
 			<thead class="thead-silver">
 				<form action="update_customer.php" method="POST">
 					<tr>
-						<td>						
-							<label for="newrole"></label>
-							<select name="newrole" id="newrole" style="width:fit-content;">
-							<option value="">Select Role</option>
-							<option value="admin">Admin</option>
-							<option value="customer">Customer</option>
-							</select>
-							<button type="submit">Update Role</button>
-						</td>	
 						<td><?php echo $a_row["roles"];?></td>
+						<td><input type="" name="ID" value="<?php echo $a_row['CustomerID']; ?>"></td>
 						<td><input type="" name="user_name" value="<?php echo $a_row['user_name']; ?>"></td> 
 						<td><input type="" name="FirstName" value="<?php echo $a_row['FirstName']; ?>"></td> 
 						<td><input type="" name="LastName" value="<?php echo $a_row['LastName']; ?>"></td> 
@@ -80,6 +72,7 @@ include("./header.php") ;
 					  	<?php }	// End of while loop
 				  		?>
 				  	</tr>
+					  <button type="submit">Update Role</button>
 				</form>
 			</thead>
 		</table>
@@ -98,6 +91,7 @@ include("./header.php") ;
 					<fieldset class="form-group">
 						<tr>
 							<th style="font-weight: bold;">OrderID</th>
+							<th style="font-weight: bold;">Customer ID</th>
 							<th style="font-weight: bold;">User Name</th>
 							<th style="font-weight: bold;">First Name</th>
 							<th style="font-weight: bold;">Last name</th>
@@ -114,7 +108,7 @@ include("./header.php") ;
 
 							<?php
 							// Step 1: prepare the statement to list all the employees
-							$stmt=$connect->prepare("select customer.user_name, customer.FirstName, customer.LastName, orders.Date_Ordered,
+							$stmt=$connect->prepare("select customer.CustomerID, customer.user_name, customer.FirstName, customer.LastName, orders.Date_Ordered,
 							orders.Date_Delivered, orders.Date_Collected, orders.Deposit_Left, orders.Quantity, orders.CustomerID, orders.OrderID, orders.Contacted, orders.Courtesy_Call,
 							orders.Brand, orders.Payment_Method, orders.Total_Price
 							from orders
@@ -133,17 +127,18 @@ include("./header.php") ;
 
 								<tr>
 									<td name="OrderID"><?php echo $a_row["OrderID"];?></td>
+									<td name="CustomerID"><?php echo $a_row["CustomerID"];?></td>
 									<td><input type="" name="user_name" value="<?php echo $a_row['user_name']; ?>"></td> 
 									<td><input type="" name="FirstName" value="<?php echo $a_row['FirstName']; ?>"></td> 
 									<td><input type="" name="LastName" value="<?php echo $a_row['LastName']; ?>"></td> 
 									<td><input type="" name="Date_Ordered" value="<?php echo $a_row['Date_Ordered']; ?>"></td> 
-									<td><input type="date" name="Date_Delivered" value="<?php echo $a_row['Date_Delivered']; ?>"></td> 
-									<td><input type="date" name="Date_Collected" value="<?php echo $a_row['Date_Collected']; ?>"></td> 
-									<td><input type="decimal" name="Deposit_Left" value="<?php echo $a_row['Deposit_Left']; ?>"></td> 
+									<td><input type="" name="Date_Delivered" value="<?php echo $a_row['Date_Delivered']; ?>"></td> 
+									<td><input type="" name="Date_Collected" value="<?php echo $a_row['Date_Collected']; ?>"></td> 
+									<td><input type="" name="Deposit_Left" value="<?php echo $a_row['Deposit_Left']; ?>"></td> 
 									<td><input type="" name="Payment_Method" value="<?php echo $a_row['Payment_Method']; ?>"></td> 
 									<td><input type="" name="Brand" value="<?php echo $a_row['Brand']; ?>"></td> 
-									<td><input type="text" name="Contacted" value="<?php echo $a_row['Contacted']; ?>"></td> 
-									<td><input type="text" name="Courtesy_Call" value="<?php echo $a_row['Courtesy_Call']; ?>"></td> 
+									<td><input type="" name="Contacted" value="<?php echo $a_row['Contacted']; ?>"></td> 
+									<td><input type="" name="Courtesy_Call" value="<?php echo $a_row['Courtesy_Call']; ?>"></td> 
 									<td><input type="" name="" value="<?php echo $a_row['Total_Price']; ?>"></td> 
 									<?php }	// End of while loop
 									?>
@@ -172,6 +167,7 @@ include("./header.php") ;
 					<!-- The table header row -->
 				<thead>
 					<tr>
+						<th style="font-weight: bold;">Customer ID</th>
 						<th style="font-weight: bold;">User Name</th>
 						<th style="font-weight: bold;">First Name</th>
 						<th style="font-weight: bold;">Last name</th>
@@ -184,7 +180,7 @@ include("./header.php") ;
 
 				<?php
 				// Step 1: prepare the statement to list all the employees
-				$stmt=$connect->prepare("select customer.user_name, customer.FirstName, customer.LastName, measurment.Bust_Measurments, measurment.Masectomy, measurment.Cup_size, measurment.underarm_measurments
+				$stmt=$connect->prepare("select customer.CustomerID, customer.user_name, customer.FirstName, customer.LastName, measurment.Bust_Measurments, measurment.Masectomy, measurment.Cup_size, measurment.underarm_measurments
 											from measurment
 											inner join customer on measurment.CustomerID=customer.CustomerID;") ;
 
@@ -200,7 +196,8 @@ include("./header.php") ;
 				while ($a_row = $stmt->fetch(PDO::FETCH_ASSOC))
 					{	
 						// Display the table contents here ?>
-						<tr>	
+						<tr>
+							<td><?php echo $a_row["CustomerID"];?></td>
 							<td><?php echo $a_row["user_name"];?></td>
 							<td><?php echo$a_row["FirstName"];?></td>
 							<td><?php echo$a_row["LastName"];?></td>
@@ -215,6 +212,7 @@ include("./header.php") ;
 		</div> <!-- Column container -->
 	</div> <!-- Justify center -->
 </div> <!-- Row container -->
+
 <a href="logout_admin.php" class="button">Logout</a>
 
 <style>

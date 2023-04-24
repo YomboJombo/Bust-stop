@@ -13,16 +13,11 @@ $stmt->bindParam(1, $firstname, PDO::PARAM_STR);
 $stmt->bindParam(2, $lastname, PDO::PARAM_STR);
 $stmt->bindParam(3, $postcode, PDO::PARAM_STR);
 
-//execute the SQL statement and retrieve the customer ID
-$stmt->execute();
-$result = $stmt->fetchALL(PDO::FETCH_ASSOC);
-if (!empty($result)) {
-    $CustomerID = $result[0]['CustomerID'];
-
-} else {
-    //no user found with the provided information
-    $CustomerID = null;
-}
+// execute the SQL statement and retrieve the customer ID
+if ($stmt->execute()) {
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($result) {
+        $customer_id = $result['CustomerID'];
 
     // Initialize the basket array
     $_SESSION['checkout'] = array();
@@ -78,7 +73,7 @@ foreach ($_SESSION['checkout'] as $product => $productInfo) {
             ":Payment" => $payment_method,
             ":brand" => $brand,
             ":Total_Price" => $totalPrice,
-            ":CustomerID" => $CustomerID,
+            ":CustomerID" => $customer_id,
             ":ProductID" => $productID
         ));
 
@@ -95,6 +90,12 @@ foreach ($_SESSION['checkout'] as $product => $productInfo) {
     include("./header.php");
     echo 'Your basket is empty.';
     include("./footer.php");
+}
+} else {
+    echo "No customer found with firstname and lastname.";
+}
+} else {
+echo "Error retrieving customer ID: " . $stmt->errorInfo()[2];
 }
 // Destroy the session
 session_destroy();

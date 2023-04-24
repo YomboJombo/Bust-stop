@@ -10,16 +10,24 @@ $underarm_mes = $_REQUEST["underarm"] ;
 $cup_size = $_REQUEST["cup_size"] ;
 $masectomy = $_REQUEST["masectomy"] ;
 
-// Retrieve user's measurements from the database
-$stmt = $connect->prepare("SELECT * FROM measurements WHERE CustomerID = $CustomerID");
-$result = mysqli_query($conn, $stmt);
-$measurements = mysqli_fetch_assoc($result);
-// Create adn encrypt a copy of the password 
-// In this exercise we are going to use shal encryption in its simplest form
-if ($measurements) {  
-    echo "You have already added your measurements.<br>";
-    echo "If you want to update them, please edit your existing measurements.";
-    }else{
+// Check if the user has already added their measurements
+$stmt = $connect->prepare( "SELECT * FROM measurment WHERE CustomerID = ?");
+$stmt->execute((
+	[$CustomerID]
+));
+$result = $stmt->fetch();
+?>
+<?php
+if ($result) {
+	include("./header.php") ;
+  	echo "You have already added your measurements. <br>";
+	echo " Back to log in screen. "; ?>
+	<a href='./login_cust.php'>login page</a> 
+	<?php	include("./footer.php") ;
+	exit();
+
+} else {
+
     // Allow the user to add their measurements
 	$stmt = $connect->prepare("insert into measurment (Bust_Measurments, Masectomy, Cup_size, underarm_measurments, CustomerID) 
 							   values (:Bust_Measurments, :Masectomy, :Cup_size, :underarm_measurments, :CustomerID) ");
@@ -41,6 +49,8 @@ if ($measurements) {
 
 // Close the database connection
 include("./close_db.php") ;
+
+session_destroy();
 ?>
 	
 

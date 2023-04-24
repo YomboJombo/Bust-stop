@@ -49,12 +49,14 @@ include("./header.php") ;
 							<td><?php echo$a_row["Cup_size"];?></td>
 							<td><?php echo$a_row["underarm_measurments"];?></td>
 						 </tr>
-					<?php } else {
-
-						// No customer found with the provided ID
-    					echo "<p>No customer found with ID " . $customerID . "</p>";
-					}	// End of while loop
-				  ?>
+					<?php } else { ?>
+						
+						<!-- No customer found with the provided ID -->
+    					<p>There doesnt seem to be any measurments you have added to the system. <br> If you wish to add your measurements please visit <br> 
+						<a href="./login_cust.php">log in</a> page, and add in your measurments. </p>
+						<!-- End of while loop -->
+			<?php	}  ?>
+					  
 			</table>
 		</div> <!-- Column container -->
 	</div> <!-- Row container -->

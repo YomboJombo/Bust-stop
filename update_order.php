@@ -1,51 +1,54 @@
-<?php
-include("./connect_db.php");
-?>
-<?php
-// Assign the transferred POST variables from the form name="" variables.
-$brand = $_POST["Brand"];
-$paymentMethod = $_POST["Payment_Method"];
+<?php 
+session_start();
+include("./header.php");
+ // connect to connect_db.php
+ include("./connect_db.php");
+?> 
 
-$dateDelivered = $_POST["Date_Delivered"];
-$dateCollected = $_POST["Date_Collected"];
-$depositLeft = $_POST["Deposit_Left"];
-$contacted = $_POST["Contacted"];
-$courtesyCall = $_POST["Courtesy_Call"];
-$orderID = $_POST["OrderID"];
+    <!-- Add teh page content container -->
+    <div class="container-fluid">
+        <h6 style="text-align: center; color: black; font-style: italic;">Update the customers order</h6>
+        <p style="text-align: center; color: black;">Fill in the form below</p>
+    </div> <!-- Container -->
 
-// prepare the SQL statement to retrieve the order ID based on the provided information
-$stmt = $connect->prepare("SELECT OrderID FROM orders WHERE Brand = :brand OR Payment_Method = :paymentMethod");
-$stmt->bindParam(':brand', $brand, PDO::PARAM_STR);
-$stmt->bindParam(':paymentMethod', $paymentMethod, PDO::PARAM_STR);
+  </tbody>
+</table>
 
-// execute the SQL statement and retrieve the order ID
-$stmt->execute();
-$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    <!-- Add the form container -->
+    <div class="container-fluid">
+        <form action="process_update_orders.php" method="POST">
+            <fieldset class="form-group">
 
-if (!empty($result)) {
-    $orderID = $result[0]['OrderID'];
-} else {
-    // no order found with the provided information
-    $orderID = null;
-}
-
-// prepare the SQL statement to update the order information
-$stmt = $connect->prepare("UPDATE orders SET Date_Delivered = :dateDelivered, Date_Collected = :dateCollected, Deposit_Left = :depositLeft, Contacted = :contacted, Courtesy_Call = :courtesyCall WHERE OrderID = :orderID");
-
-// bind parameters to the statement
-$stmt->bindParam(':dateDelivered', $dateDelivered);
-$stmt->bindParam(':dateCollected', $dateCollected);
-$stmt->bindParam(':depositLeft', $depositLeft);
-$stmt->bindParam(':contacted', $contacted);
-$stmt->bindParam(':courtesyCall', $courtesyCall);
-$stmt->bindParam(':orderID', $orderID);
-
-// execute the SQL statement
-$stmt->execute();
-
-
-header("Location: ./display_cust.php");
-exit();
-// Close the database connection
-include("./close_db.php") ;
-?>
+                <div class="form-group">
+                    <label class="form-control-label" for="firstname" style="font-weight: bold;">Enter the order ID:</label>
+                    <p><input type="number" name="OrderID" value="" required></p>
+           
+                    <label class="form-control-label" for="firstname" style="font-weight: bold;">Enter the date of delivery:</label>
+                    <p><input type="date" name="Date_Delivered"  value="" required></p>
+                  
+                    <label class="form-control-label" for="firstname" style="font-weight: bold;">Enter the date of collection:</label>
+                    <p><input type="date" name="Date_Collected"  value="" required></p>
+                 
+                    <label class="form-control-label" for="firstname" style="font-weight: bold;">Enter whats deposit is left:</label>
+                    <p><input type="decimal" name="Deposit_Left"  value="" required></p>
+                   
+                    <label class="form-control-label" for="firstname" style="font-weight: bold;">Enter yes or no if the customer has been contacted:</label>
+                    <p><input type="text" name="Contacted"  value="" required></p>
+                  
+                    <label class="form-control-label" for="firstname" style="font-weight: bold;">Enter yes or no if you hevant made teh courtesy call:</label>
+                    <p><input type="text" name="Courtesy_Call" value="" required></p>
+               
+                </div> 
+              </fieldset> <!-- Feildset-->
+            <!-- The form button -->
+            <div style="text-align: center;">
+                 <button class="btn btn-primary" type="submit">Submit</button>
+            <div>
+        </form> <!-- Form-->
+        <?php
+	?>
+    </div> <!-- Container -->
+    <?php
+    session_destroy();
+   include("./footer.php")
+   ?>  
