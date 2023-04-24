@@ -81,7 +81,7 @@ include("./connect_db.php");
 					{	?>
 					<div class="product">
 					<form action="basket.php" method="post">
-						<img src="img/Gossard animal print.jpg">
+						<img src="img/Soft cup Berlei bra.jpg">
 						<h1><input type="hidden" name="brand" id="brand" value="<?php echo $a_row['Brand']; ?>"><?php echo $a_row["Brand"];?></h1>
 						<h2><input type="hidden" name="item" id="item" value="<?php echo $a_row['Item']; ?>"><?php echo $a_row["Item"];?></h2>
 						<p><input type="hidden" name="Description" value="<?php $a_row['Description']; ?>"><?php echo $a_row["Description"];?></p>
