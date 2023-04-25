@@ -37,6 +37,7 @@ include("./header.php") ;
             <input class="form-control" type="text" style="width: 250px ;" id="post_code" name="post_code" value="<?php echo $a_row['PostCode'] ; ?>" >
         </div>
         <div class="form-group">
+            <label class="form-control-label" for="pass" style="font-weight: bold;">Enter the same or update your password:</label>
             <input class="form-control" type="text" id="pass" name="pass" placeholder="Enter your password" required>
           </div>
           <input type="hidden" name="CustomerID" value="<?php echo htmlspecialchars($_SESSION['CustomerID']); ?>">
