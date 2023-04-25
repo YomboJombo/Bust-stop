@@ -37,7 +37,7 @@ include("./header.php") ;
             <input class="form-control" type="text" style="width: 250px ;" id="post_code" name="post_code" value="<?php echo $a_row['PostCode'] ; ?>" >
         </div>
         <div class="form-group">
-            <input class="form-control" type="text" id="pass" name="pass" placeholder="Update your password">
+            <input class="form-control" type="text" id="pass" name="pass" placeholder="Enter your password" required>
           </div>
           <input type="hidden" name="CustomerID" value="<?php echo htmlspecialchars($_SESSION['CustomerID']); ?>">
         </fieldset> <!-- Fieldset -->
@@ -150,21 +150,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		</fieldset> <!-- Fieldset -->
     <a href="logout.php">Logout</a>
-		<!-- The form Button -->
-
-    <div class="container-fluid">
-          <form action="update_password.php" method="POST">
-           <!-- update customers mesurments -->
-        <p style="text-align: left; color: black;">Use this form to update your password</p>
-		  <fieldset class="form-group">
-
-
-        </fieldset> <!-- Fieldset -->
-    
-         <div style="text-align: center;"><button class="btn btn-primary" type="submit">Update your password</button></div>
-	      </form> <!-- Form -->
-	    </div> <!-- Container -->
-
 
   <?php
 
