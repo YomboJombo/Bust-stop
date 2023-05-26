@@ -39,3 +39,4 @@ if ($stmt->execute()) {
 } else {
     echo "Error retrieving customer ID: " . $stmt->errorInfo()[2];
 }
+include("./close_db.php");

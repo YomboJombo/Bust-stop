@@ -4,9 +4,6 @@ if (isset($_session['CustomerID'])){
 // connect to databse
 include("./connect_db.php") ;
 
-
-
-
 // Assign the transferred POST variables from the form name="" variables.\
 $bust_mes = $_REQUEST["bust_mes"] ;
 $masectomy = $_REQUEST["masectomy"] ;

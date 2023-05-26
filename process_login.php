@@ -4,11 +4,6 @@ include("./connect_db.php");
 
 session_start();
 
-if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    header("location: ./login_cust.php");
-    exit;
-}
-
 // Assign the transferred POST variables.
 $user_name = $_POST["user_name"] ;
 $enter_password = $_POST["enter_password"] ;
@@ -42,7 +37,6 @@ if ($enter_password == $confirm_password)
     if (($a_row["user_name"] && $a_row["Password"]) != null )
     {
         // Store om session varaibles
-        $_SESSION["loggedin"] = true;
         $_SESSION["CustomerID"] = $a_row['CustomerID'];
         $_SESSION["user_name"] = 'user_name';
         
